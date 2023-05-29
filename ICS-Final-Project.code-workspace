@@ -1,0 +1,28 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"node_modules/": true,
+		}
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"type": "chrome",
+				"request": "launch",
+				"name": "Debug with Vite",
+				"url": "http://localhost:3000",
+				"webRoot": "${workspaceFolder}/src",
+				"sourceMapPathOverrides": {
+					"webpack:///./~/*": "${workspaceFolder}/node_modules/*",
+					"webpack:///./*": "${workspaceFolder}/src/*"
+				}
+			}
+		]
+	}
+}
