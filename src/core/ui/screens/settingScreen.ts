@@ -1,24 +1,11 @@
-/*
- * @Author       : FYWinds i@windis.cn
- * @Date         : 2023-04-14 14:02:54
- * @LastEditors  : FYWinds i@windis.cn
- * @LastEditTime : 2023-05-25 14:18:09
- * @FilePath     : /src/core/ui/screens/mainScreen.ts
- *
- * Copyright (c) 2023 by FYWinds
- * All Rights Reserved.
- * Any modifications or distributions of the file
- * should mark the original author's name.
- */
-
-import { height, width } from "../../../main";
-import { ButtonWithText } from "../components/buttonWithText";
-import { CheckboxWithText } from "../components/checkboxWithText";
-import { Component } from "../components/component";
-import { Text } from "../components/text";
-import { BaseScreen } from "./baseScreen";
-import { MainScreen } from "./mainScreen";
-import { ScreenManager } from "./screenManager";
+import { height, width } from '../../../main';
+import { ButtonWithText } from '../components/buttonWithText';
+import { CheckboxWithText } from '../components/checkboxWithText';
+import { Component } from '../components/component';
+import { Text } from '../components/text';
+import { BaseScreen } from './baseScreen';
+import { MainScreen } from './mainScreen';
+import { ScreenManager } from './screenManager';
 
 export class SettingScreen extends BaseScreen {
     static instance: SettingScreen;
@@ -32,8 +19,8 @@ export class SettingScreen extends BaseScreen {
     components: Component[];
 
     constructor() {
-        super()
-        this.id = "settings-screen";
+        super();
+        this.id = 'settings-screen';
         this.x = 0;
         this.y = 0;
         this.width = 0;
@@ -46,42 +33,47 @@ export class SettingScreen extends BaseScreen {
         this.init();
     }
 
-
     init() {
         // Draw help title
-        let title = new Text(
-            "Game Settings",
+        const title = new Text(
+            'Game Settings',
             Math.round(width * 0.4),
             Math.round(height * 0.02),
-            Math.round(width * 0.20),
-            Math.round(height * 0.10),
+            Math.round(width * 0.2),
+            Math.round(height * 0.1),
             this,
-            "#ffffff",
-            "#ffffff",
-            "#ffffff",
+            '#ffffff',
+            '#ffffff',
+            '#ffffff',
             true,
             undefined,
-            "settings-title"
+            'settings-title'
         );
         this.components.push(title);
 
-        let backgroundMusic = new CheckboxWithText(
-            576, 324, 50, 768, "Enable Background Music", this, true
-        )
-        this.components.push(backgroundMusic)
+        const backgroundMusic = new CheckboxWithText(
+            576,
+            324,
+            768,
+            50,
+            'Enable Background Music',
+            this,
+            true
+        );
+        this.components.push(backgroundMusic);
 
         // Back button
-        let back_button = new ButtonWithText(
+        const back_button = new ButtonWithText(
             Math.round(width * 0.02),
             Math.round(height * 0.02),
             Math.round(width * 0.14),
             Math.round(height * 0.08),
-            "Back",
+            'Back',
             this
         );
         this.components.push(back_button);
         back_button.onClickedHandler.push(() => {
-            ScreenManager.switchScreen(MainScreen.instance)
+            ScreenManager.switchScreen(MainScreen.instance);
         });
     }
 
@@ -90,9 +82,5 @@ export class SettingScreen extends BaseScreen {
         this.components.forEach((component) => {
             component.draw();
         });
-    }
-
-    remove(): void {
-        throw new Error("Method not implemented.");
     }
 }

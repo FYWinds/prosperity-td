@@ -31,10 +31,13 @@ export default defineConfig({
     //   },
     // }),
     viteCompression({ algorithm: "brotliCompress" }),
-    FullReload("src/**/*"),
+    FullReload("**", { always: true, log: true, root: "src" }),
   ],
   build: {
     chunkSizeWarningLimit: 1000,
     brotliSize: false,
   },
+  server: {
+    hmr: false,
+  }
 });

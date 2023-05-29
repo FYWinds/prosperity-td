@@ -1,17 +1,4 @@
-/*
- * @Author       : FYWinds i@windis.cn
- * @Date         : 2023-05-18 14:01:43
- * @LastEditors  : FYWinds i@windis.cn
- * @LastEditTime : 2023-05-24 14:43:14
- * @FilePath     : /src/core/ui/screens/screenManager.ts
- * 
- * Copyright (c) 2023 by FYWinds
- * All Rights Reserved.
- * Any modifications or distributions of the file
- * should mark the original author's name.
- */
-
-import { BaseScreen } from "./baseScreen";
+import { BaseScreen } from './baseScreen';
 
 export class ScreenManager {
     static screens: Map<string, BaseScreen> = new Map<string, BaseScreen>();
@@ -30,7 +17,7 @@ export class ScreenManager {
     }
 
     static switchScreen(screen: BaseScreen): void {
-        this.currentScreen = [screen]
+        this.currentScreen = [screen];
     }
 
     static removeScreen(): void {
@@ -46,4 +33,4 @@ export class ScreenManager {
             screen.draw();
         });
     }
-}   
+}

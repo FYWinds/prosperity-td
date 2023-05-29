@@ -1,5 +1,5 @@
-import { Coord } from "../map/map";
+import { Coord } from '../map/coord';
 
 export interface BaseEnemy {
-    cell: Coord
+    cell: Coord;
 }

@@ -1,25 +1,9 @@
-/*
- * @Author       : FYWinds i@windis.cn
- * @Date         : 2023-05-25 14:37:49
- * @LastEditors  : FYWinds i@windis.cn
- * @LastEditTime : 2023-05-25 15:13:22
- * @FilePath     : /src/core/features/map/map.ts
- * 
- * Copyright (c) 2023 by FYWinds
- * All Rights Reserved.
- * Any modifications or distributions of the file
- * should mark the original author's name.
- */
-
-import { p } from "../../../main";
-import { Drawable } from "../../ui/drawable";
-import { BaseEnemy } from "../enemy/baseEnemy";
-import { BaseTower } from "../tower/baseTower";
-
-export interface Coord {
-    x: number;
-    y: number;
-}
+import { p } from '../../../main';
+import { Component } from '../../ui/components/component';
+import { BaseScreen } from '../../ui/screens/baseScreen';
+import { BaseEnemy } from '../enemy/baseEnemy';
+import { BaseTower } from '../tower/baseTower';
+import { Coord } from './coord';
 
 class Grid {
     readonly cellSize: number; // in pixel
@@ -35,38 +19,56 @@ class Grid {
     }
 
     isValidCell(cell: Coord): boolean {
-        return cell.x >= 0 && cell.x < this.cols && cell.y >= 0 && cell.y < this.rows;
+        return (
+            cell.x >= 0 &&
+            cell.x < this.cols &&
+            cell.y >= 0 &&
+            cell.y < this.rows
+        );
     }
 
     isCellEmpty(cell: Coord): boolean {
-        return this.grid[cell.x][cell.y] === 0
+        return this.grid[cell.x][cell.y] === 0;
     }
 }
 
-export class Map implements Drawable {
-    grid: Grid = new Grid(20, 20, 50)
-    towers: Array<[BaseTower]> = []
-    enemies: Array<[BaseEnemy]> = []
+export class Map implements Component {
+    id = 'game-map';
+    x = 540;
+    y = 40;
+    width = -1;
+    height = -1;
+    visible = true;
+    parent: Component | BaseScreen | null = this;
+    grid: Grid = new Grid(20, 20, 50);
+    towers: Array<[BaseTower]> = [];
+    enemies: Array<[BaseEnemy]> = [];
 
     constructor() {
-        this.refresh()
+        this.refresh();
     }
 
     refresh(): void {
-        this.towers = []
-        this.enemies = []
+        this.towers = [];
+        this.enemies = [];
     }
 
     draw(): void {
-        const start = { x: 540, y: 40 }
         p.stroke(0);
-        for (let x = start.x; x <= start.x + this.grid.cols * this.grid.cellSize; x += this.grid.cellSize) {
-            p.line(x, start.y, x, start.y + this.grid.cellSize * this.grid.rows);
+        for (
+            let x = this.x;
+            x <= this.x + this.grid.cols * this.grid.cellSize;
+            x += this.grid.cellSize
+        ) {
+            p.line(x, this.y, x, this.y + this.grid.cellSize * this.grid.rows);
         }
-        for (let y = start.y; y <= start.y + this.grid.rows * this.grid.cellSize; y += this.grid.cellSize) {
-            p.line(y, start.x, y, start.x + this.grid.cellSize * this.grid.cols);
+        for (
+            let y = this.y;
+            y <= this.y + this.grid.rows * this.grid.cellSize;
+            y += this.grid.cellSize
+        ) {
+            p.line(y, this.x, y, this.x + this.grid.cellSize * this.grid.cols);
         }
+        p.noStroke();
     }
-
-    remove(): void { }
 }
