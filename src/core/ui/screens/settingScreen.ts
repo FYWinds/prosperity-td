@@ -56,6 +56,11 @@ export class SettingScreen extends BaseScreen {
             'settings-title'
         );
         this.components.push(title);
+        if (
+            SettingsStore.getInstance().getSetting('backgroundMusic') === 'on'
+        ) {
+            SettingsStore.getInstance().setSetting('backgroundMusic', 'off');
+        } // The music can't be autoplayed due to browser policy
 
         const backgroundMusic = new CheckboxWithText(
             576,
@@ -77,12 +82,6 @@ export class SettingScreen extends BaseScreen {
             // eslint-disable-next-line no-unused-expressions
             backgroundMusic.checked ? this.bgm.play() : this.bgm.pause();
         });
-        if (
-            SettingsStore.getInstance().getSetting('backgroundMusic') === 'on'
-        ) {
-            this.bgm.loop = true;
-            this.bgm.play();
-        }
 
         const showEnemyPath = new CheckboxWithText(
             576,
