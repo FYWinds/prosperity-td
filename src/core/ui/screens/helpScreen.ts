@@ -54,7 +54,6 @@ export class HelpScreen extends BaseScreen {
             'help-title'
         );
         this.components.push(title);
-        // TODO use a image as the game tutorial
         // Back button
         const back_button = new ButtonWithText(
             Math.round(width * 0.02),

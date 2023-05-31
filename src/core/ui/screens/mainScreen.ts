@@ -3,6 +3,7 @@ import { ButtonWithText } from '../components/buttonWithText';
 import type { Component } from '../components/component';
 import { Text } from '../components/text';
 import { BaseScreen } from './baseScreen';
+import { CreditScreen } from './creditScreen';
 import { GameScreen } from './gameScreen';
 import { HelpScreen } from './helpScreen';
 import { ScreenManager } from './screenManager';
@@ -106,7 +107,7 @@ export class MainScreen extends BaseScreen {
         );
         this.components.push(credits_button);
         credits_button.onClickedHandler.push(() => {
-            // TODO Switch to Credit Screen
+            ScreenManager.switchScreen(CreditScreen.instance);
             console.log('Credits Button Clicked');
         });
         // Version Text
