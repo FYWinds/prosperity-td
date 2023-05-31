@@ -9,7 +9,6 @@ import { MainScreen } from './mainScreen';
 import { ScreenManager } from './screenManager';
 
 export class HelpScreen extends BaseScreen {
-    static instance: HelpScreen;
     id: string;
     x: number;
     y: number;
@@ -21,6 +20,12 @@ export class HelpScreen extends BaseScreen {
 
     helpImage: Image;
 
+    static _instance: HelpScreen;
+    static get instance() {
+        this._instance = this._instance ?? new HelpScreen();
+        return this._instance;
+    }
+
     constructor() {
         super();
         this.id = 'help-screen';
@@ -31,7 +36,6 @@ export class HelpScreen extends BaseScreen {
         this.visible = true;
         this.parent = null;
         this.components = [];
-        HelpScreen.instance = this;
 
         this.init();
         this.helpImage = p.loadImage(helpImageData);

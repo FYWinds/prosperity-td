@@ -7,7 +7,6 @@ import { MainScreen } from './mainScreen';
 import { ScreenManager } from './screenManager';
 
 export class CreditScreen extends BaseScreen {
-    static _instance: CreditScreen;
     id: string;
     x: number;
     y: number;
@@ -17,6 +16,7 @@ export class CreditScreen extends BaseScreen {
     parent: BaseScreen | null;
     components: Component[];
 
+    static _instance: CreditScreen;
     static get instance() {
         this._instance = this._instance ?? new CreditScreen();
         return this._instance;

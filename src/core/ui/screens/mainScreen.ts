@@ -10,7 +10,6 @@ import { ScreenManager } from './screenManager';
 import { SettingScreen } from './settingScreen';
 
 export class MainScreen extends BaseScreen {
-    static instance: MainScreen;
     id: string;
     x: number;
     y: number;
@@ -19,6 +18,12 @@ export class MainScreen extends BaseScreen {
     visible: boolean;
     parent: BaseScreen | null;
     components: Component[];
+
+    static _instance: MainScreen;
+    static get instance() {
+        this._instance = this._instance ?? new MainScreen();
+        return this._instance;
+    }
 
     constructor() {
         super();
@@ -31,7 +36,6 @@ export class MainScreen extends BaseScreen {
         this.visible = true;
         this.parent = null;
         this.components = [];
-        MainScreen.instance = this;
 
         this.init();
     }

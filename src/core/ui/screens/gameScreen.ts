@@ -12,7 +12,6 @@ import { ScreenManager } from './screenManager';
 export let map: Map;
 
 export class GameScreen extends BaseScreen {
-    static instance: GameScreen;
     id: string;
     x: number;
     y: number;
@@ -26,6 +25,12 @@ export class GameScreen extends BaseScreen {
     moneyInfo: Text = new Text('Money: 0', 1560, 80, 150, 30, this);
     lifeInfo: Text = new Text('Life: 100', 1560, 120, 150, 30, this);
 
+    static _instance: GameScreen;
+    static get instance() {
+        this._instance = this._instance ?? new GameScreen();
+        return this._instance;
+    }
+
     constructor() {
         super();
         this.id = 'game-screen';
@@ -36,7 +41,6 @@ export class GameScreen extends BaseScreen {
         this.visible = true;
         this.parent = null;
         this.components = [];
-        GameScreen.instance = this;
     }
 
     init() {

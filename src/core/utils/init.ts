@@ -1,3 +1,4 @@
+import { CreditScreen } from '../ui/screens/creditScreen';
 import { GameScreen } from '../ui/screens/gameScreen';
 import { HelpScreen } from '../ui/screens/helpScreen';
 import { MainScreen } from '../ui/screens/mainScreen';
@@ -12,16 +13,12 @@ export function initGame() {
 
     SettingsStore.getInstance().loadSettingsFromCookies();
 
-    const mainScreen = new MainScreen();
-    const helpScreen = new HelpScreen();
-    const settingScreen = new SettingScreen();
-    const gameScreen = new GameScreen();
+    ScreenManager.registerScreen(MainScreen.instance);
+    ScreenManager.registerScreen(HelpScreen.instance);
+    ScreenManager.registerScreen(SettingScreen.instance);
+    ScreenManager.registerScreen(GameScreen.instance);
+    ScreenManager.registerScreen(CreditScreen.instance);
 
-    ScreenManager.registerScreen(mainScreen);
-    ScreenManager.registerScreen(helpScreen);
-    ScreenManager.registerScreen(settingScreen);
-    ScreenManager.registerScreen(gameScreen);
-
-    ScreenManager.showScreen(mainScreen);
+    ScreenManager.showScreen(MainScreen.instance);
     initialized = true;
 }

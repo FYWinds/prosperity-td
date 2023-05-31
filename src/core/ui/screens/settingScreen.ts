@@ -10,7 +10,6 @@ import { MainScreen } from './mainScreen';
 import { ScreenManager } from './screenManager';
 
 export class SettingScreen extends BaseScreen {
-    static instance: SettingScreen;
     id: string;
     x: number;
     y: number;
@@ -22,6 +21,12 @@ export class SettingScreen extends BaseScreen {
 
     bgm: HTMLAudioElement;
 
+    static _instance: SettingScreen;
+    static get instance() {
+        this._instance = this._instance ?? new SettingScreen();
+        return this._instance;
+    }
+
     constructor() {
         super();
         this.id = 'settings-screen';
@@ -32,7 +37,6 @@ export class SettingScreen extends BaseScreen {
         this.visible = true;
         this.parent = null;
         this.components = [];
-        SettingScreen.instance = this;
 
         this.bgm = new Audio(music);
 
