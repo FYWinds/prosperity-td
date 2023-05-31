@@ -21,6 +21,7 @@ export class MainScreen extends BaseScreen {
 
     constructor() {
         super();
+
         this.id = 'main-screen';
         this.x = 0;
         this.y = 0;
@@ -62,7 +63,9 @@ export class MainScreen extends BaseScreen {
         );
         this.components.push(play_button);
         play_button.onClickedHandler.push(() => {
+            GameScreen.instance.init();
             ScreenManager.switchScreen(GameScreen.instance);
+            console.log('Play Button Clicked');
         });
         // Settings Button
         const settings_button = new ButtonWithText(

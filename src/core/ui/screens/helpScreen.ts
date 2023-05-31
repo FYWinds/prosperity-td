@@ -1,4 +1,6 @@
-import { height, width } from '../../../main';
+import { Image } from 'p5';
+import helpImageData from '../../../assets/help.png';
+import { height, p, width } from '../../../main';
 import { ButtonWithText } from '../components/buttonWithText';
 import { Component } from '../components/component';
 import { Text } from '../components/text';
@@ -17,6 +19,8 @@ export class HelpScreen extends BaseScreen {
     parent: BaseScreen | null;
     components: Component[];
 
+    helpImage: Image;
+
     constructor() {
         super();
         this.id = 'help-screen';
@@ -30,6 +34,7 @@ export class HelpScreen extends BaseScreen {
         HelpScreen.instance = this;
 
         this.init();
+        this.helpImage = p.loadImage(helpImageData);
     }
 
     init() {
@@ -70,5 +75,12 @@ export class HelpScreen extends BaseScreen {
         this.components.forEach((component) => {
             component.draw();
         });
+        p.image(
+            this.helpImage,
+            width * 0.02,
+            height * 0.14,
+            width * 0.96,
+            height * 0.84
+        );
     }
 }

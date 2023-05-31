@@ -24,7 +24,7 @@ export class ScreenManager {
         this.currentScreen.pop();
     }
 
-    static getCurrentScreen(): BaseScreen {
+    static getCurrentScreen(): BaseScreen | undefined {
         return this.currentScreen[this.currentScreen.length - 1];
     }
 

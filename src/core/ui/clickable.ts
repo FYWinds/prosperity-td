@@ -3,7 +3,7 @@ export interface Clickable {
     mouseUpHandler: Array<() => void>;
     onClickedHandler: Array<() => void>;
 
-    mouseDown(): void;
-    mouseUp(): void;
-    onClicked(): void;
+    mouseDown(x: number, y: number): void;
+    mouseUp(x: number, y: number): void;
+    onClicked(x: number, y: number): void;
 }

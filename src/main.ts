@@ -14,15 +14,14 @@ new p5((p5Instance) => {
     p = p5Instance as p5;
 
     p.setup = function setup() {
-        console.log('🚀 - Setup initialized - P5 is running');
+        // console.log('🚀 - Setup initialized - P5 is running');
 
         p.createCanvas(1920, 1080);
-        p.rectMode(p.CORNER).noFill().frameRate(30);
+        p.rectMode(p.CORNER).noFill().frameRate(60);
 
         width = p.width;
         height = p.height;
-        console.log(`📏 - Width: ${width} Height: ${height}`);
-
+        // console.log(`📏 - Width: ${width} Height: ${height}`);
         initGame();
     };
 
@@ -32,19 +31,19 @@ new p5((p5Instance) => {
     };
 
     p.mousePressed = () => {
-        ScreenManager.getCurrentScreen().mouseDown(p.mouseX, p.mouseY);
+        ScreenManager.getCurrentScreen()?.mouseDown(p.mouseX, p.mouseY);
     };
 
     p.mouseReleased = () => {
-        ScreenManager.getCurrentScreen().mouseUp(p.mouseX, p.mouseY);
+        ScreenManager.getCurrentScreen()?.mouseUp(p.mouseX, p.mouseY);
     };
 
     p.mouseClicked = () => {
-        ScreenManager.getCurrentScreen().mouseClicked(p.mouseX, p.mouseY);
+        ScreenManager.getCurrentScreen()?.mouseClicked(p.mouseX, p.mouseY);
     };
 
     p.mouseMoved = () => {
-        ScreenManager.getCurrentScreen().mouseMoved(p.mouseX, p.mouseY);
+        ScreenManager.getCurrentScreen()?.mouseMoved(p.mouseX, p.mouseY);
     };
 
     p.windowResized = () => {};

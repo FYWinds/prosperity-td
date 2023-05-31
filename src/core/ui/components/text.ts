@@ -68,6 +68,10 @@ export class Text implements Component, Clickable, Hoverable {
             .text(this.text, this.x, this.y, this.width, this.height);
     }
 
+    updateText(text: string): void {
+        this.text = text;
+    }
+
     mouseDown(): void {
         this.renderColor = this.clickColor;
         this.mouseDownHandler.forEach((handler) => handler());

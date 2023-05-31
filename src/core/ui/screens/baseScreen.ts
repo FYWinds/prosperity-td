@@ -9,7 +9,7 @@ export abstract class BaseScreen implements Drawable {
     height: number;
     visible: boolean;
     parent: BaseScreen | null;
-    components: Component[];
+    components: Array<Component>;
 
     constructor() {
         this.id = 'base-screen';
@@ -19,7 +19,7 @@ export abstract class BaseScreen implements Drawable {
         this.height = 0;
         this.visible = true;
         this.parent = null;
-        this.components = [];
+        this.components = new Array<Component>();
 
         this.init();
     }
@@ -46,8 +46,8 @@ export abstract class BaseScreen implements Drawable {
                         y > component.y &&
                         y < component.y + component.height
                 )
-                .at(-1) as any
-        )?.onClicked();
+                .slice(-1)[0] as any
+        )?.onClicked(x, y);
     }
 
     mouseDown(x: number, y: number): void {
@@ -61,8 +61,8 @@ export abstract class BaseScreen implements Drawable {
                         y > component.y &&
                         y < component.y + component.height
                 )
-                .at(-1) as any
-        )?.mouseDown();
+                .slice(-1)[0] as any
+        )?.mouseDown(x, y);
     }
 
     mouseUp(x: number, y: number): void {
@@ -76,8 +76,8 @@ export abstract class BaseScreen implements Drawable {
                         y > component.y &&
                         y < component.y + component.height
                 )
-                .at(-1) as any
-        )?.mouseUp();
+                .slice(-1)[0] as any
+        )?.mouseUp(x, y);
     }
 
     mouseMoved(x: number, y: number): void {
@@ -91,8 +91,8 @@ export abstract class BaseScreen implements Drawable {
                         y > component.y &&
                         y < component.y + component.height
                 )
-                .at(-1) as any
-        )?.onHover();
+                .slice(-1)[0] as any
+        )?.onHover(x, y);
 
         this.components
             .filter((component) => 'onHover' in component)
@@ -104,9 +104,9 @@ export abstract class BaseScreen implements Drawable {
                     y < component.y + component.height
                 ) {
                     if (!(component as any).mouseHovering)
-                        (component as any).onMouseIn();
+                        (component as any).onMouseIn(x, y);
                 } else if ((component as any).mouseHovering) {
-                    (component as any).onMouseOut();
+                    (component as any).onMouseOut(x, y);
                 }
             });
     }

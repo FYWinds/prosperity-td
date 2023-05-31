@@ -4,7 +4,7 @@ export interface Hoverable {
     mouseOutHandler: Array<() => void>;
     mouseHovering: boolean;
 
-    onHover(): void;
-    onMouseIn(): void;
-    onMouseOut(): void;
+    onHover(x: number, y: number): void;
+    onMouseIn(x: number, y: number): void;
+    onMouseOut(x: number, y: number): void;
 }

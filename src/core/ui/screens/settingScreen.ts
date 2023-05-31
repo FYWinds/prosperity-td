@@ -1,4 +1,6 @@
+import music from '../../../assets/bgm.mp3';
 import { height, width } from '../../../main';
+import SettingsStore from '../../utils/settings';
 import { ButtonWithText } from '../components/buttonWithText';
 import { CheckboxWithText } from '../components/checkboxWithText';
 import { Component } from '../components/component';
@@ -18,6 +20,8 @@ export class SettingScreen extends BaseScreen {
     parent: BaseScreen | null;
     components: Component[];
 
+    bgm: HTMLAudioElement;
+
     constructor() {
         super();
         this.id = 'settings-screen';
@@ -29,6 +33,8 @@ export class SettingScreen extends BaseScreen {
         this.parent = null;
         this.components = [];
         SettingScreen.instance = this;
+
+        this.bgm = new Audio(music);
 
         this.init();
     }
@@ -58,9 +64,43 @@ export class SettingScreen extends BaseScreen {
             50,
             'Enable Background Music',
             this,
-            true
+            SettingsStore.getInstance().getSetting('backgroundMusic') === 'on'
         );
         this.components.push(backgroundMusic);
+        backgroundMusic.onClickedHandler.push(() => {
+            // Change settings
+            SettingsStore.getInstance().setSetting(
+                'backgroundMusic',
+                backgroundMusic.checked ? 'on' : 'off'
+            );
+            this.bgm.currentTime = 0;
+            // eslint-disable-next-line no-unused-expressions
+            backgroundMusic.checked ? this.bgm.play() : this.bgm.pause();
+        });
+        if (
+            SettingsStore.getInstance().getSetting('backgroundMusic') === 'on'
+        ) {
+            this.bgm.loop = true;
+            this.bgm.play();
+        }
+
+        const showEnemyPath = new CheckboxWithText(
+            576,
+            384,
+            768,
+            50,
+            'Show Enemy Path',
+            this,
+            SettingsStore.getInstance().getSetting('showEnemyPath') === 'on'
+        );
+        this.components.push(showEnemyPath);
+        showEnemyPath.onClickedHandler.push(() => {
+            // Change settings
+            SettingsStore.getInstance().setSetting(
+                'showEnemyPath',
+                showEnemyPath.checked ? 'on' : 'off'
+            );
+        });
 
         // Back button
         const back_button = new ButtonWithText(
